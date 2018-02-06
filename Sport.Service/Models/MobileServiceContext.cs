@@ -10,7 +10,7 @@ namespace Sport.Service.Models
 {
     public class MobileServiceContext : DbContext
     {
-        private const string connectionStringName = "Name=MS_TableConnectionString";
+        private static string connectionStringName = ConfigurationManager.ConnectionStrings["MS_TableConnectionString"].ConnectionString;
 
         public MobileServiceContext() : base(connectionStringName)
 		{
