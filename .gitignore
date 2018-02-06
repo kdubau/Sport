@@ -5,6 +5,7 @@
 *.suo
 *.user
 *.sln.docstates
+.vs
 
 # Build results
 [Dd]ebug/
@@ -190,7 +191,6 @@ run_Android_XTC.sh
 .vs/config/
 
 .DS_Store
-*.sh
 com.xamarin.sport_public.apk
 com.xamarin.sport_public.ipa
 device_sets.txt
