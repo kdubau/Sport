@@ -11,7 +11,7 @@ namespace Sport.Mobile.Shared
         public static readonly string MobileCenterKeyAndroid = "%APPCENTER_ANDROID_KEY%";
 
         public static readonly string SourceCodeUrl = "https://github.com/kdubau/sport";
-		public static readonly string GooglePushNotificationSenderId = string.Empty; //Probably need to migrate to FCM (Firebase)
+		public static readonly string GooglePushNotificationSenderId = "469968893431";
         public static readonly string AzureDomainLocal = "http://localhost:2077/";
         public static readonly string AzureDomainRemote = "https://xqa-sport.azurewebsites.net/";
 
