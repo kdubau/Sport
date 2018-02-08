@@ -1,17 +1,17 @@
 using Foundation;
 using ImageCircle.Forms.Plugin.iOS;
+using Microsoft.Azure.Mobile;
 using Microsoft.WindowsAzure.MobileServices;
-using UIKit;
-using System;
-using Xamarin.Forms;
-using System.Diagnostics;
 using Newtonsoft.Json;
 using Sport.Mobile.Shared;
-using Microsoft.Azure.Mobile;
+using System;
+using System.Diagnostics;
+using UIKit;
+using Xamarin.Forms;
 
 namespace Sport.Mobile.iOS
 {
-	[Register("AppDelegate")]
+    [Register("AppDelegate")]
 	public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
 	{
 		public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
@@ -20,9 +20,9 @@ namespace Sport.Mobile.iOS
 			Xamarin.Calabash.Start();
 			//#endif
 
-			Keys.GoogleClientId = Keys.GoogleClientIdiOS;
-			Keys.GoogleServerID = Keys.GoogleServerIdiOS;
-			SimpleAuth.Providers.Google.Init ();
+			//Keys.GoogleClientId = Keys.GoogleClientIdiOS;
+			//Keys.GoogleServerID = Keys.GoogleServerIdiOS;
+			//SimpleAuth.Providers.Google.Init ();
 
 			CurrentPlatform.Init();
 			SQLitePCL.CurrentPlatform.Init();

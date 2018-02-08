@@ -46,11 +46,11 @@ namespace Sport.Mobile.Droid
             {
                 AdjustStatusBar(0);
 
-                Keys.GoogleClientId = Keys.GoogleClientIdAndroid;
-                Keys.GoogleServerID = Keys.GoogleServerIdAndroid;
+                //Keys.GoogleClientId = Keys.GoogleClientIdAndroid;
+                //Keys.GoogleServerID = Keys.GoogleServerIdAndroid;
 
                 base.OnCreate(bundle);
-                SimpleAuth.Providers.Google.Init(Application);
+                //SimpleAuth.Providers.Google.Init(Application);
 
                 ToolbarResource = Resource.Layout.Toolbar;
 
