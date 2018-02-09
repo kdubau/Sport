@@ -125,15 +125,7 @@ namespace Sport.Mobile.Shared
 					"https://www.googleapis.com/auth/userinfo.profile",
 				};
 
-                string azureTennant = "72f988bf-86f1-41af-91ab-2d7cd011db47";
-                string azureClientId = "1b2e0218-e276-4d18-80e0-420fd9bed31b";
-                var azureApi = new ADFSApi("Azure", azureClientId,
-                                       $"https://login.microsoftonline.com/{azureTennant}/oauth2/authorize",
-                                       $"https://login.microsoftonline.com/{azureTennant}/oauth2/token", "");
-                var userData = await azureApi.Get("https://graph.windows.net/me?api-version=1.6");
-
-
-                api = new ADFSApi("Azure", Keys.ADClientId, Keys.ADAuthUrl, Keys.ADTokenUrl, Keys.ADResourceId);
+				api = new ADFSApi("Azure", Keys.ADClientId, Keys.ADAuthUrl, Keys.ADTokenUrl, Keys.ADResourceId, redirectUrl: Keys.ADCallBack);
 
                 //api = new GoogleApi("google", Keys.GoogleClientId)
                 //{
@@ -141,21 +133,21 @@ namespace Sport.Mobile.Shared
                 //	Scopes = scopes,
                 //};
 
-                var data = await api.Get("https://graph.windows.net/me?api-version=1.6");
+                //var data = await api.Get("https://graph.windows.net/me?api-version=1.6");
 
 				account = await api.Authenticate();
 				var oauth = account as OAuthAccount;
-				var token = account.UserData["ServerToken"];
 
 				if (account != null)
 				{
-					var jObject = JObject.Parse($"{{'id_token':'{oauth.IdToken}', 'authorization_code':'{token}'}}");
-					var usr = await AzureService.Instance.Client.LoginAsync(MobileServiceAuthenticationProvider.Google, jObject);
+					var jObject = JObject.Parse($"{{'access_token':'{oauth.Token}'}}");
+					var usr = await AzureService.Instance.Client.LoginAsync(Keys.AuthenticationProvider, jObject);
 					return usr;
 				}
 			}
 			catch(MobileServiceInvalidOperationException e)
 			{
+
 				if (e.Response.StatusCode == System.Net.HttpStatusCode.InternalServerError)
 				{
 					if (api != null)
@@ -366,7 +358,7 @@ namespace Sport.Mobile.Shared
 
 			if(clearCookies)
 			{
-                var api = new ADFSApi("ad", Keys.ADClientId, Keys.ADAuthUrl, Keys.ADTokenUrl, Keys.ADResourceId, "http://localhost/");
+				var api = new ADFSApi("ad", Keys.ADClientId, Keys.ADAuthUrl, Keys.ADTokenUrl, Keys.ADResourceId, redirectUrl: Keys.ADCallBack);
 
                 api.ResetData();
 				Settings.RegistrationComplete = false;

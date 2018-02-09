@@ -22,8 +22,9 @@ namespace Sport.Mobile.Shared
 
         public const string ADAuthUrl = "https://login.microsoftonline.com/72f988bf-86f1-41af-91ab-2d7cd011db47/oauth2/authorize";
         public const string ADTokenUrl = "https://login.microsoftonline.com/72f988bf-86f1-41af-91ab-2d7cd011db47/oauth2/token";
-        public const string ADResourceId = "";
-        public const string ADClientId = "1b2e0218-e276-4d18-80e0-420fd9bed31b";
+		public const string ADResourceId = "70adec41-e9f5-40cf-8677-a49f8eeb569d";
+		public const string ADClientId = "1b2e0218-e276-4d18-80e0-420fd9bed31b";
+		public const string ADCallBack = "xqasport://easyauth.callback";
 
         public static string AzureDomain = AzureDomainRemote;
 	}

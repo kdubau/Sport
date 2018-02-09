@@ -31,7 +31,7 @@ namespace Sport.Mobile.Shared
 		{
 			get
 			{
-				return AppSettings.GetValueOrDefault<bool>(_registrationComplete, false);
+				return AppSettings.GetValueOrDefault(_registrationComplete, false);
 			}
 			set
 			{
@@ -43,7 +43,7 @@ namespace Sport.Mobile.Shared
 		{
 			get
 			{
-				return AppSettings.GetValueOrDefault<string>(_deviceToken, null);
+				return AppSettings.GetValueOrDefault(_deviceToken, null);
 			}
 			set
 			{
@@ -55,7 +55,7 @@ namespace Sport.Mobile.Shared
 		{
 			get
 			{
-				return AppSettings.GetValueOrDefault<string>(_googleRefreshToken, null);
+				return AppSettings.GetValueOrDefault(_googleRefreshToken, null);
 			}
 			set
 			{
@@ -67,7 +67,7 @@ namespace Sport.Mobile.Shared
 		{
 			get
 			{
-				return AppSettings.GetValueOrDefault<string>(_googleAccessToken, null);
+				return AppSettings.GetValueOrDefault(_googleAccessToken, null);
 			}
 			set
 			{
@@ -87,7 +87,7 @@ namespace Sport.Mobile.Shared
 		{
 			get
 			{
-				return AppSettings.GetValueOrDefault<string>(_athleteId, null);
+				return AppSettings.GetValueOrDefault(_athleteId, null);
 			}
 			set
 			{
@@ -99,7 +99,7 @@ namespace Sport.Mobile.Shared
 		{
 			get
 			{
-				return AppSettings.GetValueOrDefault<string>(_googleUserId, null);
+				return AppSettings.GetValueOrDefault(_googleUserId, null);
 			}
 			set
 			{
@@ -111,7 +111,7 @@ namespace Sport.Mobile.Shared
 		{
 			get
 			{
-				return AppSettings.GetValueOrDefault<string>(_azureUserId, null);
+				return AppSettings.GetValueOrDefault(_azureUserId, null);
 			}
 			set
 			{
@@ -123,7 +123,7 @@ namespace Sport.Mobile.Shared
 		{
 			get
 			{
-				return AppSettings.GetValueOrDefault<string>(_azureAuthToken, null);
+				return AppSettings.GetValueOrDefault(_azureAuthToken, null);
 			}
 			set
 			{
