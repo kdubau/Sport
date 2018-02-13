@@ -278,7 +278,6 @@
     <Compile Include="Providers\HUDProvider.cs" />
     <Compile Include="Providers\ToastNotifier.cs" />
     <Compile Include="Providers\PushNotifications.cs" />
-    <Compile Include="Helpers\Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Sport.Mobile.Shared\Sport.Mobile.Shared.csproj">
