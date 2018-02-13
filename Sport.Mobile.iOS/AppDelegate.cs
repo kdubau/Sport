@@ -56,9 +56,7 @@ namespace Sport.Mobile.iOS
 
 		public override bool OpenUrl (UIApplication app, NSUrl url, NSDictionary options)
 		{
-			if (SimpleAuth.Native.OpenUrl (app, url, options))
-				return true;
-			return base.OpenUrl (app, url, options);
+			return SimpleAuth.Native.OpenUrl(app, url, options);
 		}
 
 		public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
