@@ -93,7 +93,7 @@ namespace Sport.Mobile.Shared
 				try
 				{
 					AuthenticationStatus = "Loading...";
-                    MobileServiceUser user = await AuthenticateWithGoogle();
+                    MobileServiceUser user = await AuthenticateWithActiveDirectory();
 
 					if(user != null)
 					{
@@ -112,7 +112,7 @@ namespace Sport.Mobile.Shared
 			}
 		}
 
-		public async Task<MobileServiceUser> AuthenticateWithGoogle()
+		public async Task<MobileServiceUser> AuthenticateWithActiveDirectory()
 		{
 			Account account = null;
             ADFSApi api = null;
@@ -140,7 +140,7 @@ namespace Sport.Mobile.Shared
 
 				if (account != null)
 				{
-					var jObject = JObject.Parse($"{{'access_token':'{oauth.Token}'}}");
+					var jObject = JObject.Parse($"{{'access_token':'{oauth.Token}', 'response_type':'code id_token'}}");
 					var usr = await AzureService.Instance.Client.LoginAsync(Keys.AuthenticationProvider, jObject);
 					return usr;
 				}
@@ -153,7 +153,7 @@ namespace Sport.Mobile.Shared
 					if (api != null)
 					{
 						api.ResetData();
-						return await AuthenticateWithGoogle();
+						return await AuthenticateWithActiveDirectory();
 					}
 				}
 
@@ -199,7 +199,9 @@ namespace Sport.Mobile.Shared
 						break;
 						
 					case MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory:
-						break;
+                        Settings.RefreshToken = _identity.RefreshToken;
+                        Settings.AccessToken = _identity.AccessToken;
+                        break;
 						
 				}
 			}
@@ -398,7 +400,7 @@ namespace Sport.Mobile.Shared
 
 					var ad = new ActiveDirectoryUserProfile();
 					ad.Id = _identity.UserClaims.SingleOrDefault(c => c.Typ == "http://schemas.microsoft.com/identity/claims/objectidentifier")?.Val;
-					ad.Email = _identity.UserClaims.SingleOrDefault(c => c.Typ == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress")?.Val;
+					ad.Email = _identity.UserClaims.SingleOrDefault(c => c.Typ == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn")?.Val;
 					ad.Name = _identity.UserClaims.SingleOrDefault(c => c.Typ == "name")?.Val;
 
 					return ad;
