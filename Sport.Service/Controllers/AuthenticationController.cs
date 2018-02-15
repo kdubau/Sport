@@ -17,13 +17,13 @@ namespace Sport.Service.Controllers
 		MobileServiceContext _context = new MobileServiceContext();
 
 		[HttpGet, Route("api/getUserIdentity")]
-		public async Task<GoogleCredentials> GetUserIdentity(HttpRequestMessage request = null)
+		public async Task<AzureActiveDirectoryCredentials> GetUserIdentity(HttpRequestMessage request = null)
 		{
             try
             {
 				var cp = User as ClaimsPrincipal;
 				var id = cp.FindFirst(ClaimTypes.NameIdentifier);
-                var creds = await User.GetAppServiceIdentityAsync<GoogleCredentials>(request ?? Request);
+                var creds = await User.GetAppServiceIdentityAsync<AzureActiveDirectoryCredentials>(request ?? Request);
                 return creds;
             }
             catch (Exception e)

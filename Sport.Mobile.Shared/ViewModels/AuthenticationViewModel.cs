@@ -93,7 +93,7 @@ namespace Sport.Mobile.Shared
 				try
 				{
 					AuthenticationStatus = "Loading...";
-                    MobileServiceUser user = await AuthenticateWithGoogle();
+                    MobileServiceUser user = await AuthenticateWithActiveDirectory();
 
 					if(user != null)
 					{
@@ -112,10 +112,10 @@ namespace Sport.Mobile.Shared
 			}
 		}
 
-		public async Task<MobileServiceUser> AuthenticateWithGoogle()
+		public async Task<MobileServiceUser> AuthenticateWithActiveDirectory()
 		{
 			Account account = null;
-			GoogleApi api = null;
+            ADFSApi api = null;
 
 			try
 			{
@@ -125,31 +125,35 @@ namespace Sport.Mobile.Shared
 					"https://www.googleapis.com/auth/userinfo.profile",
 				};
 
-				api = new GoogleApi("google", Keys.GoogleClientId)
-				{
-					ServerClientId = Keys.GoogleServerID,
-					Scopes = scopes,
-				};
+				api = new ADFSApi("Azure", Keys.ADClientId, Keys.ADAuthUrl, Keys.ADTokenUrl, Keys.ADResourceId, redirectUrl: Keys.ADCallBack);
+
+                //api = new GoogleApi("google", Keys.GoogleClientId)
+                //{
+                //	ServerClientId = Keys.GoogleServerID,
+                //	Scopes = scopes,
+                //};
+
+                //var data = await api.Get("https://graph.windows.net/me?api-version=1.6");
 
 				account = await api.Authenticate();
 				var oauth = account as OAuthAccount;
-				var token = account.UserData["ServerToken"];
 
 				if (account != null)
 				{
-					var jObject = JObject.Parse($"{{'id_token':'{oauth.IdToken}', 'authorization_code':'{token}'}}");
-					var usr = await AzureService.Instance.Client.LoginAsync(MobileServiceAuthenticationProvider.Google, jObject);
+					var jObject = JObject.Parse($"{{'access_token':'{oauth.Token}', 'response_type':'code id_token'}}");
+					var usr = await AzureService.Instance.Client.LoginAsync(Keys.AuthenticationProvider, jObject);
 					return usr;
 				}
 			}
 			catch(MobileServiceInvalidOperationException e)
 			{
+
 				if (e.Response.StatusCode == System.Net.HttpStatusCode.InternalServerError)
 				{
 					if (api != null)
 					{
 						api.ResetData();
-						return await AuthenticateWithGoogle();
+						return await AuthenticateWithActiveDirectory();
 					}
 				}
 
@@ -195,7 +199,9 @@ namespace Sport.Mobile.Shared
 						break;
 						
 					case MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory:
-						break;
+                        Settings.RefreshToken = _identity.RefreshToken;
+                        Settings.AccessToken = _identity.AccessToken;
+                        break;
 						
 				}
 			}
@@ -354,10 +360,7 @@ namespace Sport.Mobile.Shared
 
 			if(clearCookies)
 			{
-				var api = new GoogleApi("google", Keys.GoogleClientId)
-				{
-					ServerClientId = Keys.GoogleServerID,
-				};
+				var api = new ADFSApi("ad", Keys.ADClientId, Keys.ADAuthUrl, Keys.ADTokenUrl, Keys.ADResourceId, redirectUrl: Keys.ADCallBack);
 
                 api.ResetData();
 				Settings.RegistrationComplete = false;
@@ -397,7 +400,7 @@ namespace Sport.Mobile.Shared
 
 					var ad = new ActiveDirectoryUserProfile();
 					ad.Id = _identity.UserClaims.SingleOrDefault(c => c.Typ == "http://schemas.microsoft.com/identity/claims/objectidentifier")?.Val;
-					ad.Email = _identity.UserClaims.SingleOrDefault(c => c.Typ == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress")?.Val;
+					ad.Email = _identity.UserClaims.SingleOrDefault(c => c.Typ == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn")?.Val;
 					ad.Name = _identity.UserClaims.SingleOrDefault(c => c.Typ == "name")?.Val;
 
 					return ad;

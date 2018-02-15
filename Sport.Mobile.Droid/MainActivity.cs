@@ -46,11 +46,11 @@ namespace Sport.Mobile.Droid
             {
                 AdjustStatusBar(0);
 
-                Keys.GoogleClientId = Keys.GoogleClientIdAndroid;
-                Keys.GoogleServerID = Keys.GoogleServerIdAndroid;
+                //Keys.GoogleClientId = Keys.GoogleClientIdAndroid;
+                //Keys.GoogleServerID = Keys.GoogleServerIdAndroid;
 
                 base.OnCreate(bundle);
-                SimpleAuth.Providers.Google.Init(Application);
+				SimpleAuth.NativeCustomTabsAuthenticator.Activate(Application);
 
                 ToolbarResource = Resource.Layout.Toolbar;
 
@@ -128,4 +128,12 @@ namespace Sport.Mobile.Droid
             }
         }
     }
+
+	[Activity(NoHistory = true, LaunchMode = LaunchMode.SingleTop)]
+	[IntentFilter(new[] { Intent.ActionView },
+	              Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable }, DataScheme = "xqasport")]
+	public class SimpleAuthActivity : SimpleAuth.Droid.CustomTabs.SimpleAuthCallbackActivity
+	{
+
+	}
 }

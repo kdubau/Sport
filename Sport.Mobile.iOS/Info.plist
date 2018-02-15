@@ -66,10 +66,10 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.707751590419-1rv4eautkn4qlt8djvkbqa6nov0p7f0p</string>
+				<string>xqasport</string>
 			</array>
 			<key>CFBundleURLName</key>
-			<string>GoogleAuth</string>
+			<string>com.xamarin.sport.xqa</string>
 		</dict>
 	</array>
 </dict>
