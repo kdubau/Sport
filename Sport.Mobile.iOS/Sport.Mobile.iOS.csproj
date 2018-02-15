@@ -233,7 +233,7 @@
       <HintPath>..\packages\Xam.Plugins.Settings.3.0.1\lib\Xamarin.iOS10\Plugin.Settings.dll</HintPath>
     </Reference>
     <Reference Include="SimpleAuth">
-      <HintPath>..\packages\Clancey.SimpleAuth.1.0.48\lib\Xamarin.iOS10\SimpleAuth.dll</HintPath>
+      <HintPath>..\packages\Clancey.SimpleAuth.1.0.49\lib\Xamarin.iOS10\SimpleAuth.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
