@@ -36,7 +36,7 @@ namespace Sport.Mobile.iOS
 
 
 			UIApplication.SharedApplication.StatusBarStyle = UIStatusBarStyle.LightContent;
-			UIBarButtonItem.Appearance.SetBackButtonTitlePositionAdjustment(new UIOffset(0, -100), UIBarMetrics.Default);
+			//UIBarButtonItem.Appearance.SetBackButtonTitlePositionAdjustment(new UIOffset(0, -100), UIBarMetrics.Default);
 
 			AppDomain.CurrentDomain.UnhandledException += (sender, e) => {
 				try
