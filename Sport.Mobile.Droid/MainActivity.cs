@@ -44,7 +44,7 @@ namespace Sport.Mobile.Droid
 
             try
             {
-                AdjustStatusBar(0);
+                //AdjustStatusBar(0);
 
                 //Keys.GoogleClientId = Keys.GoogleClientIdAndroid;
                 //Keys.GoogleServerID = Keys.GoogleServerIdAndroid;

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="2" android:versionName="2.0" package="com.xamarin.xqasport" android:installLocation="auto">
-	<uses-sdk android:minSdkVersion="17" />
+	<uses-sdk android:minSdkVersion="17" android:targetSdkVersion="25" />
 	<application android:label="Sport" android:theme="@android:style/Theme.Material.Light" android:icon="@drawable/icon"></application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
