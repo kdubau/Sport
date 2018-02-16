@@ -44,10 +44,6 @@ namespace Sport.Mobile.Droid
 
             try
             {
-                AdjustStatusBar(0);
-
-                //Keys.GoogleClientId = Keys.GoogleClientIdAndroid;
-                //Keys.GoogleServerID = Keys.GoogleServerIdAndroid;
 
                 base.OnCreate(bundle);
 				SimpleAuth.NativeCustomTabsAuthenticator.Activate(Application);
@@ -77,19 +73,6 @@ namespace Sport.Mobile.Droid
         {
             base.OnActivityResult(requestCode, resultCode, data);
             SimpleAuth.Native.OnActivityResult(requestCode, resultCode, data);
-        }
-
-        public void AdjustStatusBar(int size)
-        {
-            //Temp hack until the FormsAppCompatActivity works for full screen
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
-            {
-                var statusBarHeightInfo = typeof(FormsAppCompatActivity).GetField("_statusBarHeight",
-                                              System.Reflection.BindingFlags.Instance |
-                                              System.Reflection.BindingFlags.NonPublic);
-
-                statusBarHeightInfo.SetValue(this, size);
-            }
         }
 
         protected override void OnPause()
